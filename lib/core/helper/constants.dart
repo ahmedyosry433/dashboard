@@ -8,4 +8,8 @@ class ImgPath {
   static const String settingImgPath = 'assets/svgs/setting.svg';
   static const String walletImgPath = 'assets/svgs/wallet.svg';
   static const String statisticsImgPath = 'assets/svgs/statistics.svg';
+  static const String balanceImgPath = 'assets/svgs/balance.svg';
+  static const String expensesImgPath = 'assets/svgs/expenses.svg';
+  static const String incomeImgPath = 'assets/svgs/income.svg';
+  static const String arrowImgPath = 'assets/svgs/arrow-right.png';
 }
