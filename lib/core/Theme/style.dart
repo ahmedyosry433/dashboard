@@ -3,6 +3,7 @@ import 'colors.dart';
 import 'font_weight_helper.dart';
 
 class TextStyles {
+  //Blue Color
   static TextStyle font16BlueSemiBold = const TextStyle(
     color: ColorsManager.blueColor,
     fontSize: 16,
@@ -13,6 +14,12 @@ class TextStyles {
     fontSize: 20,
     fontWeight: FontWeightHelper.semiBold,
   );
+  static TextStyle font16BlueMedium = const TextStyle(
+    color: ColorsManager.blueColor,
+    fontSize: 16,
+    fontWeight: FontWeightHelper.medium,
+  );
+  //Primary Color
   static TextStyle font24PrimrySemiBold = const TextStyle(
     color: ColorsManager.primryColor,
     fontSize: 24,
@@ -53,4 +60,19 @@ class TextStyles {
   );
 
   // Grey Color
+  static TextStyle font14GreyRegular = const TextStyle(
+    color: ColorsManager.lightGreyColor,
+    fontSize: 14,
+    fontWeight: FontWeightHelper.regular,
+  );
+  static TextStyle font16GreyRegular = const TextStyle(
+    color: ColorsManager.lightGreyColor,
+    fontSize: 16,
+    fontWeight: FontWeightHelper.regular,
+  );
+  static TextStyle font16GreySemiBold = const TextStyle(
+    color: ColorsManager.lightGreyColor,
+    fontSize: 16,
+    fontWeight: FontWeightHelper.semiBold,
+  );
 }

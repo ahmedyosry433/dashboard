@@ -1,7 +1,10 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:admin_dashboard/core/Theme/colors.dart';
+import 'package:admin_dashboard/core/Theme/style.dart';
+import 'package:admin_dashboard/core/helper/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class QuickInvoiceSection extends StatelessWidget {
   QuickInvoiceSection(
@@ -22,13 +25,7 @@ class QuickInvoiceSection extends StatelessWidget {
         children: [
           _buildHeader(),
           SizedBox(height: isWebLayout ? 32 : 20),
-          const Text(
-            'Latest Transaction',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          Text('Latest Transaction', style: TextStyles.font16BlueMedium),
           const SizedBox(height: 16),
           _buildTransactionList(isWebLayout),
           SizedBox(height: isWebLayout ? 20 : 15),
@@ -47,17 +44,17 @@ class QuickInvoiceSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          'Quick Invoice',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+        Text('Quick Invoice', style: TextStyles.font20BlueSemiBold),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.grey[100],
+            borderRadius: BorderRadius.circular(50),
           ),
-        ),
-        IconButton(
-          icon: const Icon(Icons.add),
-          onPressed: () {},
-          color: Colors.blue,
+          child: IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {},
+            color: Colors.blue,
+          ),
         ),
       ],
     );
@@ -65,7 +62,7 @@ class QuickInvoiceSection extends StatelessWidget {
 
   Widget _buildTransactionList(bool isWebLayout) {
     return SizedBox(
-      height: isWebLayout ? 120 : 100,
+      height: isWebLayout ? 72 : 70,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
@@ -95,7 +92,7 @@ class QuickInvoiceSection extends StatelessWidget {
   }
 
   Widget _buildFormSection(bool isWebLayout, bool isTabletLayout) {
-    if (isWebLayout) {
+    if (isWebLayout || isTabletLayout) {
       return Column(
         children: [
           Row(
@@ -189,6 +186,7 @@ class QuickInvoiceSection extends StatelessWidget {
     bool isWebLayout,
   ) {
     return Container(
+      width: isWebLayout ? 270 : 270,
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
         color: Colors.grey[100],
@@ -196,36 +194,18 @@ class QuickInvoiceSection extends StatelessWidget {
       ),
       child: Row(
         children: [
-          CircleAvatar(
-            radius: isWebLayout ? 35 : 25,
-            backgroundColor: Colors.blue[200],
-            child: Text(
-              initials,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: isWebLayout ? 18 : 14,
-              ),
-            ),
+          Container(
+            height: isWebLayout ? 50 : 35,
+            width: isWebLayout ? 50 : 35,
+            margin: const EdgeInsets.only(right: 8),
+            child: SvgPicture.asset(ImgPath.userImgPath),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                name,
-                style: TextStyle(
-                  fontSize: isWebLayout ? 14 : 12,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Text(
-                email,
-                style: TextStyle(
-                  fontSize: isWebLayout ? 12 : 10,
-                  color: Colors.grey[600],
-                ),
-              ),
+              Text(name, style: TextStyles.font16BlueSemiBold),
+              Text(email, style: TextStyles.font14GreyRegular),
             ],
           )
         ],
@@ -237,30 +217,38 @@ class QuickInvoiceSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+        Text(label, style: TextStyles.font16BlueMedium),
         const SizedBox(height: 8),
         TextField(
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: TextStyle(color: Colors.grey[400]),
+            hintStyle: TextStyles.font16GreyRegular,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(color: Colors.grey[300]!),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey[300]!),
+              borderSide: const BorderSide(color: Colors.white),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(color: ColorsManager.primryColor),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.red[500]!),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.red[500]!),
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
               vertical: 12,
             ),
+            filled: true,
+            fillColor: Colors.grey[100],
           ),
         ),
       ],

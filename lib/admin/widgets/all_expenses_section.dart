@@ -1,5 +1,6 @@
 import 'package:admin_dashboard/admin/widgets/card_widget.dart';
 import 'package:admin_dashboard/core/Helper/spacing.dart';
+import 'package:admin_dashboard/core/Theme/style.dart';
 import 'package:flutter/material.dart';
 
 class AllExpensesSection extends StatelessWidget {
@@ -10,8 +11,8 @@ class AllExpensesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
-      margin: EdgeInsets.only(top: isWebLayout || isTabletLayout ? 50 : 10),
+      padding: EdgeInsets.all(isWebLayout || isTabletLayout ? 20 : 10),
+      margin: EdgeInsets.only(top: isWebLayout || isTabletLayout ? 50 : 0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -25,19 +26,17 @@ class AllExpensesSection extends StatelessWidget {
           verticalSpace(10),
           Expanded(
             child: GridView.builder(
-              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: isWebLayout || isTabletLayout ? 3 : 2,
+                crossAxisCount: isWebLayout ? 3 : 2,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
               ),
               itemCount: 3,
               itemBuilder: (context, index) {
-                return SizedBox(
-                  child: CardWidget(
-                    index: index,
-                    selectedCard: 0,
-                  ),
+                return CardWidget(
+                  index: index,
+                  selectedCard: 0,
                 );
               },
             ),
@@ -51,9 +50,9 @@ class AllExpensesSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
+        Text(
           'All Expenses',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: TextStyles.font20BlueSemiBold,
         ),
         DropdownButton<String>(
           value: 'Monthly',
