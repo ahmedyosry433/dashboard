@@ -1,3 +1,4 @@
+import 'package:admin_dashboard/core/Theme/colors.dart';
 import 'package:admin_dashboard/core/helper/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,43 +21,9 @@ class ResponsiveDrawer extends StatelessWidget {
     }
   }
 
-  // ignore: unused_element
-  Widget _buildWebDrawer(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: Text(
-              'Admin Dashboard',
-              style: TextStyle(color: Colors.white, fontSize: 24),
-            ),
-          ),
-          ListTile(
-            leading: const Icon(Icons.dashboard),
-            title: const Text('Dashboard'),
-            onTap: () {
-              //! Navigate to Dashboard
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.attach_money),
-            title: const Text('Expenses'),
-            onTap: () {
-              //! Navigate to Expenses
-            },
-          ),
-          //! Add more items as needed
-        ],
-      ),
-    );
-  }
-
   Widget _buildTabletDrawer(BuildContext context) {
     return Drawer(
+      backgroundColor: Colors.white,
       width: 70,
       child: Column(
         children: [
@@ -128,6 +95,7 @@ class ResponsiveDrawer extends StatelessWidget {
 
   Widget _buildMobileDrawer(BuildContext context) {
     return Drawer(
+      backgroundColor: Colors.white,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -138,13 +106,13 @@ class ResponsiveDrawer extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.all(10),
-                  color: Colors.blueGrey,
+                  color: ColorsManager.lightGreyColor,
                   child: SvgPicture.asset(ImgPath.galleryImgPath),
                 ),
                 Container(
                     margin: const EdgeInsets.only(top: 10, bottom: 10),
                     padding: const EdgeInsets.all(10),
-                    color: Colors.lightGreenAccent,
+                    color: ColorsManager.lighterGreyColor,
                     child: Row(
                       children: [
                         SvgPicture.asset(ImgPath.userImgPath),

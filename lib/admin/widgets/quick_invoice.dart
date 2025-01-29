@@ -15,7 +15,7 @@ class QuickInvoiceSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
-      margin: EdgeInsets.only(top: isWebLayout || isTabletLayout ? 50 : 10),
+      margin: EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),

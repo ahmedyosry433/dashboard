@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:admin_dashboard/admin/widgets/card_widget.dart';
 import 'package:admin_dashboard/core/Helper/spacing.dart';
 import 'package:admin_dashboard/core/Theme/style.dart';
@@ -12,7 +14,7 @@ class AllExpensesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(isWebLayout || isTabletLayout ? 20 : 10),
-      margin: EdgeInsets.only(top: isWebLayout || isTabletLayout ? 50 : 0),
+      margin: EdgeInsets.only(top: isWebLayout || isTabletLayout ? 30 : 0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -26,7 +28,7 @@ class AllExpensesSection extends StatelessWidget {
           verticalSpace(10),
           Expanded(
             child: GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: isWebLayout ? 3 : 2,
                 crossAxisSpacing: 16,

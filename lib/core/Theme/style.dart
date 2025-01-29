@@ -19,6 +19,21 @@ class TextStyles {
     fontSize: 16,
     fontWeight: FontWeightHelper.medium,
   );
+  static TextStyle font16BlueRegular = const TextStyle(
+    color: ColorsManager.blueColor,
+    fontSize: 16,
+    fontWeight: FontWeightHelper.regular,
+  );
+  static TextStyle font16LightBlueRegular = const TextStyle(
+    color: ColorsManager.lightBlueColor,
+    fontSize: 16,
+    fontWeight: FontWeightHelper.regular,
+  );
+  static TextStyle font16LightBlueMedium = const TextStyle(
+    color: ColorsManager.lightBlueColor,
+    fontSize: 16,
+    fontWeight: FontWeightHelper.medium,
+  );
   //Primary Color
   static TextStyle font24PrimrySemiBold = const TextStyle(
     color: ColorsManager.primryColor,
@@ -31,6 +46,22 @@ class TextStyles {
     fontSize: 16,
     fontWeight: FontWeightHelper.semiBold,
   );
+  static TextStyle font16WhiteRegular = const TextStyle(
+    color: ColorsManager.whiteColor,
+    fontSize: 16,
+    fontWeight: FontWeightHelper.regular,
+  );
+  static TextStyle font13WhiteRegular = const TextStyle(
+    color: ColorsManager.whiteColor,
+    fontSize: 13,
+    fontWeight: FontWeightHelper.regular,
+  );
+  static TextStyle font20WhiteMedium = const TextStyle(
+    color: ColorsManager.whiteColor,
+    fontSize: 20,
+    fontWeight: FontWeightHelper.medium,
+  );
+  
   static TextStyle font24WhiteSemiBold = const TextStyle(
     color: ColorsManager.whiteColor,
     fontSize: 24,
