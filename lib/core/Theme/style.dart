@@ -76,6 +76,11 @@ class TextStyles {
     fontSize: 20,
     fontWeight: FontWeightHelper.medium,
   );
+  static TextStyle font16WhiteMedium = const TextStyle(
+    color: ColorsManager.whiteColor,
+    fontSize: 16,
+    fontWeight: FontWeightHelper.medium,
+  );
 
   static TextStyle font24WhiteSemiBold = const TextStyle(
     color: ColorsManager.whiteColor,

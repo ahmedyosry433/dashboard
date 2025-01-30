@@ -58,11 +58,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: Column(
                 children: [
                   Expanded(
-                    flex: layoutInfo.isWebLayout ? 1 : 2,
+                    flex: layoutInfo.isWebLayout ? 3 : 2,
                     child: _buildAllExpensesSection(layoutInfo),
                   ),
                   Expanded(
-                    flex: layoutInfo.isWebLayout ? 2 : 3,
+                    flex: layoutInfo.isWebLayout ? 5 : 3,
                     child: _buildQuickInvoiceSection(layoutInfo),
                   ),
                 ],

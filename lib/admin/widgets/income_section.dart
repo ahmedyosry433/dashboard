@@ -35,18 +35,18 @@ class _IncomeSectionState extends State<IncomeSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.only(top: 20),
+        margin: const EdgeInsets.only(top: 10),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _buildHeader(widget.isMobile),
-              const SizedBox(height: 24),
+              const SizedBox(height: 10),
               _buildContent(widget.isMobile, widget.isTabletLayout),
             ],
           ),
@@ -105,25 +105,29 @@ class _IncomeSectionState extends State<IncomeSection> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(
-          height: widget.isWebLayout ? 150 : (isTablet ? 100 : 130),
-          width: widget.isWebLayout ? 150 : (isTablet ? 100 : 130),
-          child: PieChart(
-            PieChartData(
-              sections: incomeData
-                  .map((data) => PieChartSectionData(
-                        value: data.percentage,
-                        color: data.color,
-                        title: '',
-                        radius: widget.isWebLayout ? 30 : (isTablet ? 25 : 20),
-                      ))
-                  .toList(),
-              sectionsSpace: 0,
-              centerSpaceRadius: widget.isWebLayout ? 50 : (isTablet ? 30 : 20),
+        Expanded(
+          child: SizedBox(
+            height: widget.isWebLayout ? 50 : (isTablet ? 80 : 100),
+            width: widget.isWebLayout ? 50 : (isTablet ? 80 : 100),
+            child: PieChart(
+              PieChartData(
+                sections: incomeData
+                    .map((data) => PieChartSectionData(
+                          value: data.percentage,
+                          color: data.color,
+                          title: '',
+                          radius:
+                              widget.isWebLayout ? 30 : (isTablet ? 25 : 20),
+                        ))
+                    .toList(),
+                sectionsSpace: 0,
+                centerSpaceRadius:
+                    widget.isWebLayout ? 30 : (isTablet ? 30 : 20),
+              ),
             ),
           ),
         ),
-        SizedBox(width: widget.isWebLayout ? 80 : (isTablet ? 20 : 10)),
+        SizedBox(width: widget.isWebLayout ? 30 : (isTablet ? 20 : 10)),
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -140,7 +144,7 @@ class _IncomeSectionState extends State<IncomeSection> {
                               shape: BoxShape.circle,
                             ),
                           ),
-                          const SizedBox(width: 12),
+                          const SizedBox(width: 8),
                           Expanded(
                             child: Text(data.name,
                                 style: TextStyles.font16BlueRegular),

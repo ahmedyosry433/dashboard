@@ -206,14 +206,16 @@ class _ResponsiveDrawerState extends State<ResponsiveDrawer> {
               children: [
                 ListTile(
                   leading: SvgPicture.asset(ImgPath.settingImgPath),
-                  title: const Text('Setting system'),
+                  title: Text('Setting system',
+                      style: TextStyles.font16BlueRegular),
                   onTap: () {
                     // Navigate to Expenses
                   },
                 ),
                 ListTile(
                   leading: SvgPicture.asset(ImgPath.logoutImgPath),
-                  title: const Text('Logout account'),
+                  title: Text('Logout account',
+                      style: TextStyles.font16BlueRegular),
                   onTap: () {
                     // Navigate to Expenses
                   },

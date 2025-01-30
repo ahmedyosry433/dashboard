@@ -24,16 +24,15 @@ class QuickInvoiceSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildHeader(),
-          SizedBox(height: isWebLayout ? 32 : 20),
+          SizedBox(height: isWebLayout ? 20 : 15),
           Text('Latest Transaction', style: TextStyles.font16BlueMedium),
           const SizedBox(height: 16),
           _buildTransactionList(isWebLayout),
           SizedBox(height: isWebLayout ? 20 : 15),
-          const Divider(
-            color: ColorsManager.lightGreyColor,
-            thickness: 1,
+          Divider(
+            color: Colors.grey[100],
           ),
-          SizedBox(height: isWebLayout ? 32 : 24),
+          SizedBox(height: isWebLayout ? 20 : 15),
           _buildFormSection(isWebLayout, isTabletLayout),
         ],
       ),

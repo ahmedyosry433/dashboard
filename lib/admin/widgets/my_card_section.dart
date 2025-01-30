@@ -1,3 +1,4 @@
+import 'package:admin_dashboard/core/Theme/colors.dart';
 import 'package:admin_dashboard/core/Theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -26,7 +27,12 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
       expiry: '12/20 - 124',
       color: const Color(0xFF40A0FF),
     ),
-    // Add more cards here if needed
+    CardData(
+      name: 'Ahmed Yosry',
+      number: '0918 8124 0042 8129',
+      expiry: '12/20 - 124',
+      color: ColorsManager.darkBlueColor,
+    ),
   ];
 
   final List<TransactionData> transactions = [
@@ -67,7 +73,9 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildCardSection(isMobile, isTablet),
-          const Divider(),
+          Divider(
+            color: Colors.grey[100],
+          ),
           _buildTransactionSection(isMobile),
         ],
       ),
@@ -87,12 +95,8 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
                 ? 16 / 9
                 : isTablet
                     ? 2.5
-                    : 3,
-            viewportFraction: isMobile
-                ? 0.9
-                : isTablet
-                    ? 0.7
-                    : 0.5,
+                    : 2.50,
+            viewportFraction: 1,
             enlargeCenterPage: true,
             onPageChanged: (index, reason) {
               setState(() {
@@ -105,15 +109,18 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
           },
         ),
         const SizedBox(height: 8),
+
+        // Indicator
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: cards.asMap().entries.map((entry) {
             return Container(
-              width: 8.0,
+              width: _currentCard == entry.key ? 30 : 8.0,
               height: 8.0,
               margin: const EdgeInsets.symmetric(horizontal: 4.0),
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
+                borderRadius:
+                    BorderRadius.circular(_currentCard == entry.key ? 10 : 50),
                 color: Colors.blue.withOpacity(
                   _currentCard == entry.key ? 0.9 : 0.4,
                 ),
@@ -127,7 +134,8 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
 
   Widget _buildCard(CardData card) {
     return Container(
-      padding: EdgeInsets.all(widget.isWebLayout ? 24 : 10),
+      width: double.infinity,
+      padding: EdgeInsets.all(widget.isWebLayout ? 10 : 5),
       decoration: BoxDecoration(
         color: card.color,
         borderRadius: BorderRadius.circular(16),
@@ -144,20 +152,20 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
         children: [
           Text('Name card',
               style: widget.isWebLayout
-                  ? TextStyles.font16WhiteRegular
+                  ? TextStyles.font14WhiteRegular.copyWith(fontSize: 12)
                   : TextStyles.font16WhiteRegular.copyWith(fontSize: 13)),
           Text(card.name,
               style: widget.isWebLayout
-                  ? TextStyles.font20WhiteMedium
+                  ? TextStyles.font16WhiteMedium.copyWith(fontSize: 14)
                   : TextStyles.font20WhiteMedium.copyWith(fontSize: 16)),
           const Spacer(),
           Text(card.number,
               style: widget.isWebLayout
-                  ? TextStyles.font16WhiteSemiBold
-                  : TextStyles.font16WhiteSemiBold.copyWith(fontSize: 13)),
+                  ? TextStyles.font14WhiteRegular
+                  : TextStyles.font14WhiteRegular.copyWith(fontSize: 13)),
           Text(card.expiry,
               style: widget.isWebLayout
-                  ? TextStyles.font13WhiteRegular
+                  ? TextStyles.font13WhiteRegular.copyWith(fontSize: 11)
                   : TextStyles.font13WhiteRegular.copyWith(fontSize: 11)),
         ],
       ),
@@ -202,7 +210,7 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
     final dateFormat = DateFormat('d MMM yyyy');
 
     return Container(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.grey[100],
         borderRadius: BorderRadius.circular(10),
