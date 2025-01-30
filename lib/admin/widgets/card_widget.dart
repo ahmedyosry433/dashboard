@@ -42,7 +42,9 @@ class CardWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: selectedCard == index ? Colors.blue : Colors.white,
+        color: selectedCard == index
+            ? ColorsManager.primryColor
+            : ColorsManager.whiteColor,
         borderRadius: BorderRadius.circular(16),
         border: selectedCard != index
             ? Border.all(color: Colors.grey.shade200)
@@ -72,7 +74,9 @@ class CardWidget extends StatelessWidget {
               ),
               Icon(
                 Icons.chevron_right,
-                color: selectedCard == index ? Colors.white : Colors.grey,
+                color: selectedCard == index
+                    ? Colors.white
+                    : ColorsManager.darkBlueColor,
                 size: 24,
               ),
             ],

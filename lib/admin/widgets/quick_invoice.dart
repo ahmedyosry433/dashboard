@@ -15,7 +15,7 @@ class QuickInvoiceSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
-      margin: EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -124,10 +124,19 @@ class QuickInvoiceSection extends StatelessWidget {
           ),
           const SizedBox(height: 32),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Add More Details'),
-              _buildActionButtons(true),
+              Expanded(
+                  flex: 2,
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      'Add More Details',
+                      style: TextStyles.font18LightBlueSemiBold,
+                      textAlign: TextAlign.center,
+                    ),
+                  )),
+              Expanded(flex: 2, child: _buildActionButtons()),
             ],
           ),
         ],
@@ -159,7 +168,7 @@ class QuickInvoiceSection extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 24),
-          _buildActionButtons(false),
+          _buildActionButtons(),
         ],
       );
     } else {
@@ -173,7 +182,7 @@ class QuickInvoiceSection extends StatelessWidget {
           const SizedBox(height: 16),
           _buildDropdownField('Item amount', 'USD'),
           const SizedBox(height: 24),
-          _buildActionButtons(false),
+          _buildActionButtons(),
         ],
       );
     }
@@ -268,61 +277,55 @@ class QuickInvoiceSection extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[300]!),
+            color: Colors.grey[100],
             borderRadius: BorderRadius.circular(8),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              value: initialValue,
-              isExpanded: true,
-              items: ['USD', 'EUR', 'GBP'].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (value) {},
+          child: DropdownButton<String>(
+            isExpanded: true,
+            style: TextStyles.font16GreyRegular,
+            value: initialValue,
+            items: ['USD', 'EUR', 'EG'].map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              initialValue = newValue!;
+            },
+            icon: const Icon(
+              Icons.keyboard_arrow_down,
+              size: 24,
+              color: ColorsManager.darkBlueColor,
             ),
+            dropdownColor: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            underline: Container(),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildActionButtons(bool isWebLayout) {
-    return Row(
-      mainAxisAlignment: isWebLayout
-          ? MainAxisAlignment.center
-          : MainAxisAlignment.spaceBetween,
-      children: [
-        if (!isWebLayout)
-          TextButton(
-            onPressed: () {},
-            child: const Text(
-              'Add more details',
-              style: TextStyle(color: Colors.blue),
-            ),
-          ),
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
-            padding: EdgeInsets.symmetric(
-              horizontal: isWebLayout ? 48 : 32,
-              vertical: isWebLayout ? 20 : 16,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          child: const Text(
-            'Send Money',
-            style: TextStyle(color: Colors.white),
-          ),
+  Widget _buildActionButtons() {
+    return ElevatedButton(
+      onPressed: () {},
+      style: ElevatedButton.styleFrom(
+        backgroundColor: ColorsManager.primryColor,
+        padding: EdgeInsets.symmetric(
+          horizontal: isWebLayout ? 48 : 32,
+          vertical: isWebLayout ? 20 : 16,
         ),
-      ],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+      child: const Text(
+        'Send Money',
+        style: TextStyle(color: Colors.white),
+      ),
     );
   }
 }

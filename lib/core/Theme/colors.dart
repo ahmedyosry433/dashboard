@@ -8,8 +8,9 @@ class ColorsManager {
   static const lighgreyColor = Color(0xFFF1F1F1);
   static const greenColor = Color(0xFF7DD97B);
   static const orangeColor = Color(0xFFF3735E);
-  static const blueColor = Color(0xFF064061);
-  static const lightBlueColor = Color(0xFF208CC8);
+  static const darkBlueColor = Color(0xFF064061);
+  static const lighterBlueColor = Color.fromARGB(255, 125, 183, 216);
+  static const blueColor = Color(0xFF208CC8);
   static const whiteColor = Colors.white;
   static const blackColor = Colors.black;
 }

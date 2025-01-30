@@ -6,9 +6,14 @@ import 'package:admin_dashboard/admin/widgets/my_card_section.dart';
 import 'package:admin_dashboard/admin/widgets/quick_invoice.dart';
 import 'package:admin_dashboard/admin/widgets/responisive_drawer.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   DashboardScreen({super.key});
 
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -20,7 +25,7 @@ class DashboardScreen extends StatelessWidget {
         return Scaffold(
           key: _scaffoldKey,
           appBar: _buildAppBar(layoutInfo.isMobile),
-          drawer: const ResponsiveDrawer(),
+          drawer: ResponsiveDrawer(),
           body: _buildBody(layoutInfo),
         );
       },
@@ -32,7 +37,7 @@ class DashboardScreen extends StatelessWidget {
       backgroundColor: Colors.grey[100],
       body: Row(
         children: [
-          if (!layoutInfo.isMobile) const ResponsiveDrawer(),
+          if (!layoutInfo.isMobile) ResponsiveDrawer(),
           if (layoutInfo.isWebLayout || layoutInfo.isTabletLayout)
             _buildWebTabletLayout(layoutInfo)
           else

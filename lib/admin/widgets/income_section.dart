@@ -1,17 +1,11 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:admin_dashboard/core/Theme/colors.dart';
 import 'package:admin_dashboard/core/Theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
-class IncomeSection extends StatelessWidget {
-  final List<IncomeData> incomeData = [
-    IncomeData('Design service', 40, const Color(0xFF0066FF)),
-    IncomeData('Design product', 25, const Color(0xFF69B4FF)),
-    IncomeData('Product royalti', 20, const Color(0xFF142B4B)),
-    IncomeData('Other', 22, const Color(0xFFE8ECF4)),
-  ];
-
+class IncomeSection extends StatefulWidget {
   bool isWebLayout;
   bool isTabletLayout;
   bool isMobile;
@@ -21,6 +15,23 @@ class IncomeSection extends StatelessWidget {
       required this.isWebLayout,
       required this.isMobile,
       super.key});
+
+  @override
+  State<IncomeSection> createState() => _IncomeSectionState();
+}
+
+class _IncomeSectionState extends State<IncomeSection> {
+  final List<IncomeData> incomeData = [
+    IncomeData('Design service', 40, const Color(0xFF0066FF)),
+    IncomeData('Design product', 25, const Color(0xFF69B4FF)),
+    IncomeData('Product royalti', 20, const Color(0xFF142B4B)),
+    IncomeData('Other', 22, const Color(0xFFE8ECF4)),
+  ];
+
+  String _filterOption = 'Monthly';
+
+  final List<String> _filterOptions = ['Daily', 'Weekly', 'Monthly'];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,9 +45,9 @@ class IncomeSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _buildHeader(isMobile),
+              _buildHeader(widget.isMobile),
               const SizedBox(height: 24),
-              _buildContent(isMobile, isTabletLayout),
+              _buildContent(widget.isMobile, widget.isTabletLayout),
             ],
           ),
         ));
@@ -48,22 +59,41 @@ class IncomeSection extends StatelessWidget {
       children: [
         Text('Income', style: TextStyles.font20BlueSemiBold),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.grey.shade300),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('Monthly'),
-              const SizedBox(width: 4),
-              Icon(
-                Icons.keyboard_arrow_down,
-                size: 20,
-                color: Colors.grey.shade600,
-              ),
-            ],
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: DropdownButton<String>(
+            value: _filterOption,
+            items: _filterOptions.map((String option) {
+              return DropdownMenuItem<String>(
+                value: option,
+                child: Text(
+                  option,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              if (newValue != null) {
+                setState(() {
+                  _filterOption = newValue;
+                });
+              }
+            },
+            underline: Container(),
+            icon: const Icon(
+              Icons.keyboard_arrow_down,
+              size: 20,
+              color: ColorsManager.darkBlueColor,
+            ),
+            style: TextStyles.font16BlueSemiBold,
+            dropdownColor: Colors.white,
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
       ],
@@ -76,8 +106,8 @@ class IncomeSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
-          height: isWebLayout ? 150 : (isTablet ? 100 : 130),
-          width: isWebLayout ? 150 : (isTablet ? 100 : 130),
+          height: widget.isWebLayout ? 150 : (isTablet ? 100 : 130),
+          width: widget.isWebLayout ? 150 : (isTablet ? 100 : 130),
           child: PieChart(
             PieChartData(
               sections: incomeData
@@ -85,15 +115,15 @@ class IncomeSection extends StatelessWidget {
                         value: data.percentage,
                         color: data.color,
                         title: '',
-                        radius: isWebLayout ? 30 : (isTablet ? 25 : 20),
+                        radius: widget.isWebLayout ? 30 : (isTablet ? 25 : 20),
                       ))
                   .toList(),
               sectionsSpace: 0,
-              centerSpaceRadius: isWebLayout ? 50 : (isTablet ? 30 : 20),
+              centerSpaceRadius: widget.isWebLayout ? 50 : (isTablet ? 30 : 20),
             ),
           ),
         ),
-        SizedBox(width: isWebLayout ? 80 : (isTablet ? 20 : 10)),
+        SizedBox(width: widget.isWebLayout ? 80 : (isTablet ? 20 : 10)),
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.min,
