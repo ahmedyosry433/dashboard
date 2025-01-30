@@ -20,7 +20,7 @@ class DashboardScreen extends StatelessWidget {
         return Scaffold(
           key: _scaffoldKey,
           appBar: _buildAppBar(layoutInfo.isMobile),
-          drawer: ResponsiveDrawer(),
+          drawer: const ResponsiveDrawer(),
           body: _buildBody(layoutInfo),
         );
       },
@@ -168,7 +168,7 @@ LayoutInfo _getLayoutInfo(BuildContext context, BoxConstraints constraints) {
   final isMobile = ResponsiveBreakpoints.of(context).isMobile;
   final isWebLayout = constraints.maxWidth > 1200;
   final isTabletLayout =
-      constraints.maxWidth > 600 && constraints.maxWidth <= 1200;
+      constraints.maxWidth > 900 && constraints.maxWidth <= 1200;
 
   return LayoutInfo(
     isMobile: isMobile,
