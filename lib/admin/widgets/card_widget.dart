@@ -1,99 +1,104 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:admin_dashboard/core/Theme/colors.dart';
 import 'package:admin_dashboard/core/Theme/style.dart';
 import 'package:admin_dashboard/core/helper/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CardWidget extends StatelessWidget {
-  int selectedCard = 0;
-  int index;
-  CardWidget({required this.index, required this.selectedCard, super.key});
-  final titles = ['Balance', 'Income', 'Expenses'];
-  final icons = <String>[
-    ImgPath.balanceImgPath,
-    ImgPath.incomeImgPath,
-    ImgPath.expensesImgPath,
-  ];
+  final int index;
+  final int selectedCard;
+
+  const CardWidget({
+    super.key,
+    required this.index,
+    required this.selectedCard,
+  });
+
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, dynamic>> cardData = [
+      {
+        'title': 'Balance',
+        'imgPath': ImgPath.balanceImgPath,
+        'amount': 20129,
+        'date': 'April 2022',
+      },
+      {
+        'title': 'Income',
+        'imgPath': ImgPath.incomeImgPath,
+        'amount': 20129,
+        'date': 'April 2022',
+      },
+      {
+        'title': 'Expenses',
+        'imgPath': ImgPath.expensesImgPath,
+        'amount': 20129,
+        'date': 'April 2022',
+      },
+    ];
+
+    final data = cardData[index];
+
     return Container(
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: selectedCard == index
-              ? ColorsManager.primryColor
-              : ColorsManager.lighgreyColor,
-        ),
-        color: selectedCard == index
-            ? ColorsManager.primryColor
-            : ColorsManager.whiteColor,
+        color: selectedCard == index ? Colors.blue : Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: selectedCard != index
+            ? Border.all(color: Colors.grey.shade200)
+            : null,
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: selectedCard == index
-                        ? ColorsManager.whiteColor.withOpacity(.2)
-                        : ColorsManager.lighterGreyColor,
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: SvgPicture.asset(
-                    icons[index],
-                    color: selectedCard == index
-                        ? ColorsManager.whiteColor
-                        : ColorsManager.primryColor,
-                  ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: selectedCard == index
+                      ? ColorsManager.whiteColor.withOpacity(.2)
+                      : ColorsManager.lighterGreyColor,
+                  borderRadius: BorderRadius.circular(50),
                 ),
-                const SizedBox(width: 8),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: selectedCard == index
-                        ? ColorsManager.whiteColor.withOpacity(.2)
-                        : ColorsManager.lighterGreyColor,
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: SvgPicture.asset(
-                    ImgPath.arrowImgPath,
-                    color: selectedCard == index
-                        ? ColorsManager.whiteColor
-                        : ColorsManager.blueColor,
-                  ),
+                child: SvgPicture.asset(
+                  data['imgPath'] as String,
+                  color: selectedCard == index
+                      ? ColorsManager.whiteColor
+                      : ColorsManager.blueColor,
                 ),
-              ],
-            ),
-            const Spacer(),
-            Text(
-              titles[index],
-              style: selectedCard == index
-                  ? TextStyles.font16WhiteSemiBold
-                  : TextStyles.font16BlueSemiBold,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'April 2022',
-              style: selectedCard == index
-                  ? TextStyles.font14WhiteRegular
-                  : TextStyles.font14BlackRegular,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              '\$20,129',
-              style: selectedCard == index
-                  ? TextStyles.font24WhiteSemiBold
-                  : TextStyles.font24PrimrySemiBold,
-            ),
-          ],
-        ),
+              ),
+              Icon(
+                Icons.chevron_right,
+                color: selectedCard == index ? Colors.white : Colors.grey,
+                size: 24,
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Text(
+            data['title'] as String,
+            style: selectedCard == index
+                ? TextStyles.font16WhiteSemiBold
+                : TextStyles.font16BlueSemiBold,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            data['date'] as String,
+            style: selectedCard == index
+                ? TextStyles.font14WhiteRegular
+                : TextStyles.font14BlackRegular,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            '\$${(data['amount'] as int).toStringAsFixed(0)}',
+            style: selectedCard == index
+                ? TextStyles.font24WhiteSemiBold
+                : TextStyles.font24PrimrySemiBold,
+          ),
+        ],
       ),
     );
   }
