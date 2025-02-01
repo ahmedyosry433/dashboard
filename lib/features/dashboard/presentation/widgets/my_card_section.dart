@@ -1,8 +1,12 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:admin_dashboard/core/Theme/colors.dart';
 import 'package:admin_dashboard/core/Theme/style.dart';
+import 'package:admin_dashboard/features/dashboard/data/models/card_model.dart';
+import 'package:admin_dashboard/features/dashboard/data/models/transaction_model.dart';
+import 'package:admin_dashboard/features/dashboard/presentation/widgets/transaction_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:intl/intl.dart';
 
 class CardAndTransactions extends StatefulWidget {
   bool isWebLayout;
@@ -20,14 +24,14 @@ class CardAndTransactions extends StatefulWidget {
 
 class _CardAndTransactionsState extends State<CardAndTransactions> {
   int _currentCard = 0;
-  final List<CardData> cards = [
-    CardData(
+  final List<CardModel> cards = [
+    CardModel(
       name: 'Syah Bandi',
       number: '0918 8124 0042 8129',
       expiry: '12/20 - 124',
       color: const Color(0xFF40A0FF),
     ),
-    CardData(
+    CardModel(
       name: 'Ahmed Yosry',
       number: '0918 8124 0042 8129',
       expiry: '12/20 - 124',
@@ -35,20 +39,20 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
     ),
   ];
 
-  final List<TransactionData> transactions = [
-    TransactionData(
+  final List<TransactionModel> transactions = [
+    TransactionModel(
       title: 'Cash Withdrawal',
       date: DateTime(2022, 4, 13),
       amount: 20129,
       isExpense: true,
     ),
-    TransactionData(
+    TransactionModel(
       title: 'Landing Page project',
       date: DateTime(2022, 4, 13, 15, 30),
       amount: 2000,
       isExpense: false,
     ),
-    TransactionData(
+    TransactionModel(
       title: 'Juni Mobile App project',
       date: DateTime(2022, 4, 13, 15, 30),
       amount: 20129,
@@ -132,7 +136,7 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
     );
   }
 
-  Widget _buildCard(CardData card) {
+  Widget _buildCard(CardModel card) {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(widget.isWebLayout ? 10 : 5),
@@ -198,77 +202,11 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
             return const SizedBox(height: 10);
           },
           itemBuilder: (context, index) {
-            return _buildTransactionItem(transactions[index], isMobile);
+            return TransactionWidget(
+                transaction: transactions[index], isMobile: isMobile);
           },
         ),
       ],
     );
   }
-
-  Widget _buildTransactionItem(TransactionData transaction, bool isMobile) {
-    final timeFormat = DateFormat('h:mm a');
-    final dateFormat = DateFormat('d MMM yyyy');
-
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(transaction.title, style: TextStyles.font16BlueSemiBold),
-                const SizedBox(height: 4),
-                Text(
-                    isMobile
-                        ? dateFormat.format(transaction.date)
-                        : '${dateFormat.format(transaction.date)} at ${timeFormat.format(transaction.date)}',
-                    style: TextStyles.font14GreyRegular),
-              ],
-            ),
-          ),
-          Text(
-            '${transaction.isExpense ? '-' : '+'}\$${transaction.amount.toStringAsFixed(0)}',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: transaction.isExpense ? Colors.red : Colors.green,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CardData {
-  final String name;
-  final String number;
-  final String expiry;
-  final Color color;
-
-  CardData({
-    required this.name,
-    required this.number,
-    required this.expiry,
-    required this.color,
-  });
-}
-
-class TransactionData {
-  final String title;
-  final DateTime date;
-  final double amount;
-  final bool isExpense;
-
-  TransactionData({
-    required this.title,
-    required this.date,
-    required this.amount,
-    required this.isExpense,
-  });
 }

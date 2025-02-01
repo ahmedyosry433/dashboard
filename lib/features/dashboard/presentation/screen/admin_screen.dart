@@ -1,13 +1,14 @@
+import 'package:admin_dashboard/features/dashboard/data/models/layoutinfo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:admin_dashboard/admin/widgets/all_expenses_section.dart';
-import 'package:admin_dashboard/admin/widgets/income_section.dart';
-import 'package:admin_dashboard/admin/widgets/my_card_section.dart';
-import 'package:admin_dashboard/admin/widgets/quick_invoice.dart';
-import 'package:admin_dashboard/admin/widgets/responisive_drawer.dart';
+import 'package:admin_dashboard/features/dashboard/presentation/widgets/all_expenses_section.dart';
+import 'package:admin_dashboard/features/dashboard/presentation/widgets/income_section.dart';
+import 'package:admin_dashboard/features/dashboard/presentation/widgets/my_card_section.dart';
+import 'package:admin_dashboard/features/dashboard/presentation/widgets/quick_invoice_section.dart';
+import 'package:admin_dashboard/features/dashboard/presentation/widgets/responisive_drawer.dart';
 
 class DashboardScreen extends StatefulWidget {
-  DashboardScreen({super.key});
+  const DashboardScreen({super.key});
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
@@ -25,7 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         return Scaffold(
           key: _scaffoldKey,
           appBar: _buildAppBar(layoutInfo.isMobile),
-          drawer: ResponsiveDrawer(),
+          drawer: const ResponsiveDrawer(),
           body: _buildBody(layoutInfo),
         );
       },
@@ -37,7 +38,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       backgroundColor: Colors.grey[100],
       body: Row(
         children: [
-          if (!layoutInfo.isMobile) ResponsiveDrawer(),
+          if (!layoutInfo.isMobile) const ResponsiveDrawer(),
           if (layoutInfo.isWebLayout || layoutInfo.isTabletLayout)
             _buildWebTabletLayout(layoutInfo)
           else
@@ -59,11 +60,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 children: [
                   Expanded(
                     flex: layoutInfo.isWebLayout ? 3 : 2,
-                    child: _buildAllExpensesSection(layoutInfo),
+                    child: AllExpensesSection(
+                      isTabletLayout: layoutInfo.isTabletLayout,
+                      isWebLayout: layoutInfo.isWebLayout,
+                      isMobile: layoutInfo.isMobile,
+                    ),
                   ),
                   Expanded(
                     flex: layoutInfo.isWebLayout ? 5 : 3,
-                    child: _buildQuickInvoiceSection(layoutInfo),
+                    child: QuickInvoiceSection(
+                      isTabletLayout: layoutInfo.isTabletLayout,
+                      isWebLayout: layoutInfo.isWebLayout,
+                    ),
                   ),
                 ],
               ),
@@ -77,11 +85,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 children: [
                   Expanded(
                     flex: 2,
-                    child: _buildCardAndTransactions(layoutInfo),
+                    child: CardAndTransactions(
+                      isTabletLayout: layoutInfo.isTabletLayout,
+                      isMobile: layoutInfo.isMobile,
+                      isWebLayout: layoutInfo.isWebLayout,
+                    ),
                   ),
                   Expanded(
                     flex: 1,
-                    child: _buildIncomeSection(layoutInfo),
+                    child: IncomeSection(
+                      isTabletLayout: layoutInfo.isTabletLayout,
+                      isWebLayout: layoutInfo.isWebLayout,
+                      isMobile: layoutInfo.isMobile,
+                    ),
                   ),
                 ],
               ),
@@ -99,13 +115,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              _buildAllExpensesSection(layoutInfo),
+              AllExpensesSection(
+                isTabletLayout: layoutInfo.isTabletLayout,
+                isWebLayout: layoutInfo.isWebLayout,
+                isMobile: layoutInfo.isMobile,
+              ),
               const SizedBox(height: 20),
-              _buildQuickInvoiceSection(layoutInfo),
+              QuickInvoiceSection(
+                isTabletLayout: layoutInfo.isTabletLayout,
+                isWebLayout: layoutInfo.isWebLayout,
+              ),
               const SizedBox(height: 20),
-              _buildCardAndTransactions(layoutInfo),
+              CardAndTransactions(
+                isTabletLayout: layoutInfo.isTabletLayout,
+                isMobile: layoutInfo.isMobile,
+                isWebLayout: layoutInfo.isWebLayout,
+              ),
               const SizedBox(height: 20),
-              _buildIncomeSection(layoutInfo),
+              IncomeSection(
+                isTabletLayout: layoutInfo.isTabletLayout,
+                isWebLayout: layoutInfo.isWebLayout,
+                isMobile: layoutInfo.isMobile,
+              ),
             ],
           ),
         ),
@@ -124,49 +155,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
     );
   }
-
-  Widget _buildAllExpensesSection(LayoutInfo layoutInfo) {
-    return AllExpensesSection(
-      isTabletLayout: layoutInfo.isTabletLayout,
-      isWebLayout: layoutInfo.isWebLayout,
-      isMobile: layoutInfo.isMobile,
-    );
-  }
-
-  Widget _buildQuickInvoiceSection(LayoutInfo layoutInfo) {
-    return QuickInvoiceSection(
-      isTabletLayout: layoutInfo.isTabletLayout,
-      isWebLayout: layoutInfo.isWebLayout,
-    );
-  }
-
-  Widget _buildCardAndTransactions(LayoutInfo layoutInfo) {
-    return CardAndTransactions(
-      isTabletLayout: layoutInfo.isTabletLayout,
-      isMobile: layoutInfo.isMobile,
-      isWebLayout: layoutInfo.isWebLayout,
-    );
-  }
-
-  Widget _buildIncomeSection(LayoutInfo layoutInfo) {
-    return IncomeSection(
-      isTabletLayout: layoutInfo.isTabletLayout,
-      isWebLayout: layoutInfo.isWebLayout,
-      isMobile: layoutInfo.isMobile,
-    );
-  }
-}
-
-class LayoutInfo {
-  final bool isMobile;
-  final bool isWebLayout;
-  final bool isTabletLayout;
-
-  const LayoutInfo({
-    required this.isMobile,
-    required this.isWebLayout,
-    required this.isTabletLayout,
-  });
 }
 
 LayoutInfo _getLayoutInfo(BuildContext context, BoxConstraints constraints) {

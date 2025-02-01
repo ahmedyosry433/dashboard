@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:admin_dashboard/admin/widgets/card_widget.dart';
+import 'package:admin_dashboard/features/dashboard/presentation/widgets/card_widget.dart';
 import 'package:admin_dashboard/core/Theme/colors.dart';
 import 'package:admin_dashboard/core/Theme/style.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ class AllExpensesSection extends StatefulWidget {
   final bool isWebLayout;
   final bool isTabletLayout;
 
-  AllExpensesSection({
+  const AllExpensesSection({
     super.key,
     required this.isMobile,
     required this.isWebLayout,
@@ -149,7 +149,7 @@ class _AllExpensesSectionState extends State<AllExpensesSection> {
   }
 
   Widget _buildWebLayout() {
-    return Row(
+    return const Row(
       children: [
         Expanded(
           child: CardWidget(
@@ -157,14 +157,14 @@ class _AllExpensesSectionState extends State<AllExpensesSection> {
             selectedCard: 0,
           ),
         ),
-        const SizedBox(width: 16),
+        SizedBox(width: 16),
         Expanded(
           child: CardWidget(
             index: 1,
             selectedCard: 0,
           ),
         ),
-        const SizedBox(width: 16),
+        SizedBox(width: 16),
         Expanded(
           child: CardWidget(
             index: 2,

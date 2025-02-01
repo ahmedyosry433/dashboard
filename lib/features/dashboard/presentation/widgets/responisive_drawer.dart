@@ -6,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ResponsiveDrawer extends StatefulWidget {
-  ResponsiveDrawer({super.key});
+  const ResponsiveDrawer({super.key});
 
   @override
   State<ResponsiveDrawer> createState() => _ResponsiveDrawerState();

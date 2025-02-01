@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:admin_dashboard/core/Theme/colors.dart';
 import 'package:admin_dashboard/core/Theme/style.dart';
 import 'package:admin_dashboard/core/helper/constants.dart';

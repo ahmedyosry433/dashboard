@@ -2,6 +2,7 @@
 
 import 'package:admin_dashboard/core/Theme/colors.dart';
 import 'package:admin_dashboard/core/Theme/style.dart';
+import 'package:admin_dashboard/features/dashboard/data/models/income_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -21,11 +22,11 @@ class IncomeSection extends StatefulWidget {
 }
 
 class _IncomeSectionState extends State<IncomeSection> {
-  final List<IncomeData> incomeData = [
-    IncomeData('Design service', 40, const Color(0xFF0066FF)),
-    IncomeData('Design product', 25, const Color(0xFF69B4FF)),
-    IncomeData('Product royalti', 20, const Color(0xFF142B4B)),
-    IncomeData('Other', 22, const Color(0xFFE8ECF4)),
+  final List<IncomeModel> incomeData = [
+    IncomeModel('Design service', 40, const Color(0xFF0066FF)),
+    IncomeModel('Design product', 25, const Color(0xFF69B4FF)),
+    IncomeModel('Product royalti', 20, const Color(0xFF142B4B)),
+    IncomeModel('Other', 22, const Color(0xFFE8ECF4)),
   ];
 
   String _filterOption = 'Monthly';
@@ -160,12 +161,4 @@ class _IncomeSectionState extends State<IncomeSection> {
       ],
     );
   }
-}
-
-class IncomeData {
-  final String name;
-  final double percentage;
-  final Color color;
-
-  IncomeData(this.name, this.percentage, this.color);
 }

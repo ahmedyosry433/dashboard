@@ -1,4 +1,4 @@
-import 'package:admin_dashboard/admin/screen/admin_screen.dart';
+import 'package:admin_dashboard/features/dashboard/presentation/screen/admin_screen.dart';
 import 'package:admin_dashboard/core/Router/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +8,7 @@ class AppRouter {
     switch (settings.name) {
       case Routes.dashboardScreen:
         return MaterialPageRoute(
-          builder: (_) => DashboardScreen(),
+          builder: (_) => const DashboardScreen(),
         );
 
       default:
