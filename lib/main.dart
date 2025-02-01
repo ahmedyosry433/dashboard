@@ -1,14 +1,19 @@
+import 'package:admin_dashboard/core/Router/app_router.dart';
+import 'package:admin_dashboard/core/Router/routes.dart';
 import 'package:admin_dashboard/features/dashboard/presentation/screen/admin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(MyApp(
+    appRouter: AppRouter(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({required this.appRouter, super.key});
+  final AppRouter appRouter;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,9 @@ class MyApp extends StatelessWidget {
           const Breakpoint(start: 1201, end: double.infinity, name: DESKTOP),
         ],
       ),
-      home: const DashboardScreen(),
+      debugShowCheckedModeBanner: false,
+      initialRoute: Routes.dashboardScreen,
+      onGenerateRoute: appRouter.onGenerateRoute,
     );
   }
 }

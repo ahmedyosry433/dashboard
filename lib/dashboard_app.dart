@@ -13,9 +13,7 @@ class Dashboard extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         useMaterial3: true,
       ),
-      debugShowCheckedModeBanner: false,
-      initialRoute: Routes.dashboardScreen,
-      onGenerateRoute: appRouter.onGenerateRoute,
+     
     );
   }
 }
