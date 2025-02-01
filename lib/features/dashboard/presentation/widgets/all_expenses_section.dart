@@ -128,10 +128,7 @@ class _AllExpensesSectionState extends State<AllExpensesSection> {
         ),
         SizedBox(height: 16),
         // Second row with one card
-        CardWidget(
-          index: 2,
-          selectedCard: 0,
-        ),
+
         Row(
           children: [
             Expanded(
