@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         child: HomeScreen(),
         breakpoints: [
           const Breakpoint(start: 0, end: 480, name: MOBILE),
-          const Breakpoint(start: 481, end: 1200, name: TABLET),
+          const Breakpoint(start: 930, end: 1200, name: TABLET),
           const Breakpoint(start: 1201, end: double.infinity, name: DESKTOP),
         ],
       ),

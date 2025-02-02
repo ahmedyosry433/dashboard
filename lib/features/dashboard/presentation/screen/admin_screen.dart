@@ -5,7 +5,6 @@ import 'package:admin_dashboard/features/dashboard/presentation/widgets/all_expe
 import 'package:admin_dashboard/features/dashboard/presentation/widgets/income_section.dart';
 import 'package:admin_dashboard/features/dashboard/presentation/widgets/my_card_section.dart';
 import 'package:admin_dashboard/features/dashboard/presentation/widgets/quick_invoice_section.dart';
-import 'package:admin_dashboard/features/dashboard/presentation/widgets/responisive_drawer.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -15,65 +14,52 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final layoutInfo = _getLayoutInfo(context, constraints);
+    final layoutInfo = _getLayoutInfo(context);
 
-        return Scaffold(
-          key: _scaffoldKey,
-          appBar: _buildAppBar(layoutInfo.isMobile),
-          drawer: const ResponsiveDrawer(),
-          body: _buildBody(layoutInfo),
-        );
-      },
-    );
+    return _buildBody(layoutInfo);
   }
 
   Widget _buildBody(LayoutInfo layoutInfo) {
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: Row(
-        children: [
-          if (!layoutInfo.isMobile) const ResponsiveDrawer(),
-          if (layoutInfo.isWebLayout || layoutInfo.isTabletLayout)
-            _buildWebTabletLayout(layoutInfo)
-          else
-            _buildMobileLayout(layoutInfo),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (layoutInfo.isWebLayout || layoutInfo.isTabletLayout)
+          _buildWebTabletLayout(layoutInfo)
+        else
+          _buildMobileLayout(layoutInfo),
+      ],
     );
   }
 
   Widget _buildWebTabletLayout(LayoutInfo layoutInfo) {
     return Expanded(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             flex: 2,
             child: Padding(
               padding: const EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: layoutInfo.isWebLayout ? 3 : 2,
-                    child: AllExpensesSection(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AllExpensesSection(
                       isTabletLayout: layoutInfo.isTabletLayout,
                       isWebLayout: layoutInfo.isWebLayout,
                       isMobile: layoutInfo.isMobile,
                     ),
-                  ),
-                  Expanded(
-                    flex: layoutInfo.isWebLayout ? 5 : 3,
-                    child: QuickInvoiceSection(
+                    QuickInvoiceSection(
                       isTabletLayout: layoutInfo.isTabletLayout,
                       isWebLayout: layoutInfo.isWebLayout,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -81,25 +67,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
             flex: 1,
             child: Padding(
               padding: const EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: CardAndTransactions(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CardAndTransactions(
                       isTabletLayout: layoutInfo.isTabletLayout,
                       isMobile: layoutInfo.isMobile,
                       isWebLayout: layoutInfo.isWebLayout,
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: IncomeSection(
+                    IncomeSection(
                       isTabletLayout: layoutInfo.isTabletLayout,
                       isWebLayout: layoutInfo.isWebLayout,
                       isMobile: layoutInfo.isMobile,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -144,28 +128,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  PreferredSizeWidget? _buildAppBar(bool isMobile) {
-    if (!isMobile) return null;
+  LayoutInfo _getLayoutInfo(BuildContext context) {
+    final isMobile = ResponsiveBreakpoints.of(context).isMobile;
+    final isWebLayout = ResponsiveBreakpoints.of(context).isDesktop;
+    final isTabletLayout = ResponsiveBreakpoints.of(context).isTablet;
 
-    return AppBar(
-      toolbarHeight: 50,
-      leading: IconButton(
-        icon: const Icon(Icons.menu),
-        onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-      ),
+    return LayoutInfo(
+      isMobile: isMobile,
+      isWebLayout: isWebLayout,
+      isTabletLayout: isTabletLayout,
     );
   }
-}
-
-LayoutInfo _getLayoutInfo(BuildContext context, BoxConstraints constraints) {
-  final isMobile = ResponsiveBreakpoints.of(context).isMobile;
-  final isWebLayout = constraints.maxWidth > 1200;
-  final isTabletLayout =
-      constraints.maxWidth > 900 && constraints.maxWidth <= 1200;
-
-  return LayoutInfo(
-    isMobile: isMobile,
-    isWebLayout: isWebLayout,
-    isTabletLayout: isTabletLayout,
-  );
 }

@@ -68,7 +68,7 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
 
     return Container(
       padding: const EdgeInsets.all(20),
-      margin: EdgeInsets.only(top: isWebLayout || isTablet ? 30 : 10),
+      // margin: EdgeInsets.only(top: isWebLayout || isTablet ? 30 : 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),

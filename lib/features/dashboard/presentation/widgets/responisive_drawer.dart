@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:admin_dashboard/core/Theme/colors.dart';
 import 'package:admin_dashboard/core/Theme/style.dart';
 import 'package:admin_dashboard/core/helper/constants.dart';
@@ -16,14 +18,20 @@ class ResponsiveDrawer extends StatefulWidget {
 
 class _ResponsiveDrawerState extends State<ResponsiveDrawer> {
   int selectedLink = 0;
+
   @override
   Widget build(BuildContext context) {
     final isMobile = ResponsiveBreakpoints.of(context).isMobile;
+    final isMiniTablet =
+        ResponsiveBreakpoints.of(context).between(MOBILE, TABLET);
+
     final isTablet = ResponsiveBreakpoints.of(context).isTablet;
 
     if (isMobile) {
       return _buildMobileDrawer(context);
     } else if (isTablet) {
+      return _buildTabletDrawer(context);
+    } else if (isMiniTablet) {
       return _buildTabletDrawer(context);
     } else {
       return _buildMobileDrawer(context);
@@ -38,276 +46,132 @@ class _ResponsiveDrawerState extends State<ResponsiveDrawer> {
         children: [
           Expanded(
             child: ListView(
-              padding: EdgeInsets.zero,
+              padding: const EdgeInsets.symmetric(vertical: 50),
               children: [
-                ListTile(
-                  leading: SvgPicture.asset(ImgPath.galleryImgPath),
-                  onTap: () {},
-                ),
-                ListTile(
-                  leading: SvgPicture.asset(ImgPath.dashboardImgPath),
-                  onTap: () {
-                    
-                  },
-                ),
-                _buildDrowerIcon(index: 0, item: listItems[0]),
+                _buildDrawerIcon(index: 0, item: listItems[0], isTablet: true),
                 ExpansionTile(
                   title: const Text(''),
                   leading: SvgPicture.asset(listItems[1].iconPath),
-                  subtitle: SvgPicture.asset(listItems[1].iconPath),
                   tilePadding: const EdgeInsets.only(left: 10),
                   children: [
-                    _buildDrowerIcon(index: 2, item: listItems[2]),
-                    _buildDrowerIcon(index: 3, item: listItems[3]),
+                    _buildDrawerIcon(
+                        index: 1, item: listItems[2], isTablet: true),
+                    _buildDrawerIcon(
+                        index: 2, item: listItems[3], isTablet: true),
                   ],
                 ),
-                _buildDrowerIcon(index: 3, item: listItems[3]),
-                _buildDrowerIcon(index: 4, item: listItems[4]),
+                _buildDrawerIcon(index: 3, item: listItems[4], isTablet: true),
               ],
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: ListView(
-              children: [
-                ListTile(
-                  leading: SvgPicture.asset(ImgPath.settingImgPath),
-                  onTap: () {
-                    // Navigate to Expenses
-                  },
-                ),
-                ListTile(
-                  leading: SvgPicture.asset(ImgPath.logoutImgPath),
-                  onTap: () {
-                    // Navigate to Expenses
-                  },
-                ),
-              ],
-            ),
-          ),
+          _buildBottomIcons(isTablet: true),
         ],
-      ),
-    );
-  }
-
-  final List<ListItem> listItems = [
-    ListItem(
-      iconPath: ImgPath.dashboardImgPath,
-      title: 'Dashboard',
-    ),
-    ListItem(
-      iconPath: ImgPath.transactionImgPath,
-      title: 'My Transaction',
-    ),
-    ListItem(
-      iconPath: ImgPath.statisticsImgPath,
-      title: 'Statistics',
-    ),
-    ListItem(
-      iconPath: ImgPath.walletImgPath,
-      title: 'Wallet Account',
-    ),
-    ListItem(
-      iconPath: ImgPath.chartImgPath,
-      title: 'My Investments',
-    ),
-    ListItem(
-      iconPath: ImgPath.chartImgPath,
-      title: 'Add',
-    ),
-    ListItem(
-      iconPath: ImgPath.chartImgPath,
-      title: 'Release',
-    ),
-  ];
-  Widget _buildDrowerIcon({required int index, required ListItem item}) {
-    return Container(
-      decoration: BoxDecoration(
-        color: selectedLink == index ? ColorsManager.blueColor : Colors.white,
-      ),
-      child: ListTile(
-        leading: SvgPicture.asset(
-          item.iconPath,
-          color: selectedLink == index
-              ? ColorsManager.whiteColor
-              : ColorsManager.blueColor,
-        ),
-        onTap: () {
-          print("___________");
-          setState(() {
-            selectedLink = index;
-          });
-          BlocProvider.of<HomeCubit>(context).navigateToPage(index);
-        },
       ),
     );
   }
 
   Widget _buildMobileDrawer(BuildContext context) {
     return Drawer(
+      width: MediaQuery.sizeOf(context).width / 5.5,
       backgroundColor: Colors.white,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            flex: 6,
             child: ListView(
-              padding: const EdgeInsets.only(right: 20, left: 20, top: 70),
+              padding: const EdgeInsets.only(right: 10, left: 10, top: 100),
               children: [
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  color: ColorsManager.lightGreyColor,
-                  child: SvgPicture.asset(ImgPath.galleryImgPath),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 10),
-                  padding: const EdgeInsets.all(10),
-                  color: ColorsManager.lighterGreyColor,
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(ImgPath.userImgPath),
-                      const SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Lekan Okeowo',
-                              style: TextStyles.font16BlueSemiBold),
-                          Text('demo@gmail.com',
-                              style: TextStyles.font12GreyRegular),
-                        ],
-                      ),
-                    ],
+                _buildDrawerIcon(index: 0, item: listItems[0], isTablet: false),
+                ExpansionTile(
+                  title: Text(
+                    listItems[1].title,
+                    style: TextStyles.font16BlueRegular,
                   ),
+                  leading: SvgPicture.asset(listItems[1].iconPath),
+                  tilePadding: const EdgeInsets.only(left: 10),
+                  children: [
+                    _buildDrawerIcon(
+                        index: 1, item: listItems[2], isTablet: false),
+                    _buildDrawerIcon(
+                        index: 2, item: listItems[3], isTablet: false),
+                  ],
                 ),
-
-                _buildMobileIcon(index: 0, item: listItems[0]),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      right: BorderSide(
-                        color: selectedLink == 1
-                            ? ColorsManager.lighterBlueColor
-                            : Colors.white,
-                        width: 4,
-                      ),
-                    ),
-                  ),
-                  child: ExpansionTile(
-                    title: Text(listItems[1].title),
-                    leading: SvgPicture.asset(listItems[1].iconPath),
-                    tilePadding: const EdgeInsets.only(left: 10),
-                    children: [
-                      _buildMobileIcon(index: 2, item: listItems[2]),
-                      _buildMobileIcon(index: 3, item: listItems[3]),
-                    ],
-                  ),
-                ),
-                _buildMobileIcon(index: 3, item: listItems[3]),
-                _buildMobileIcon(index: 4, item: listItems[4]),
-                // ListView.builder(
-                //   shrinkWrap: true,
-                //   physics: const NeverScrollableScrollPhysics(),
-                //   itemCount: listItems.length,
-                //   itemBuilder: (context, index) {
-                //     final item = listItems[index];
-                //     return Container(
-                //       decoration: BoxDecoration(
-                //         border: Border(
-                //           right: BorderSide(
-                //             color: selectedLink == index
-                //                 ? ColorsManager.lighterBlueColor
-                //                 : Colors.white,
-                //             width: 4,
-                //           ),
-                //         ),
-                //       ),
-                //       child: ListTile(
-                //         leading: SvgPicture.asset(item.iconPath),
-                //         title: Text(
-                //           item.title,
-                //           style: selectedLink == index
-                //               ? TextStyles.font16LightBlueBold
-                //               : TextStyles.font16BlueRegular,
-                //         ),
-                //         onTap: () {
-                //           setState(() {
-                //             selectedLink = index;
-                //           });
-                //         },
-                //       ),
-                //     );
-                //   },
-                // ),
+                _buildDrawerIcon(index: 3, item: listItems[4], isTablet: false),
               ],
             ),
           ),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                ListTile(
-                  leading: SvgPicture.asset(ImgPath.settingImgPath),
-                  title: Text('Setting system',
-                      style: TextStyles.font16BlueRegular),
-                  onTap: () {
-                    // Navigate to Expenses
-                  },
-                ),
-                ListTile(
-                  leading: SvgPicture.asset(ImgPath.logoutImgPath),
-                  title: Text('Logout account',
-                      style: TextStyles.font16BlueRegular),
-                  onTap: () {
-                    // Navigate to Expenses
-                  },
-                ),
-              ],
-            ),
-          ),
+          _buildBottomIcons(isTablet: false),
         ],
       ),
     );
   }
 
-  Widget _buildMobileIcon({required int index, required ListItem item}) {
+  Widget _buildBottomIcons({required bool isTablet}) {
+    return Column(
+      children: [
+        ListTile(
+          leading: SvgPicture.asset(ImgPath.settingImgPath),
+          title: isTablet
+              ? const Text("")
+              : Text('Settings', style: TextStyles.font16BlueRegular),
+          onTap: () {},
+        ),
+        ListTile(
+          leading: SvgPicture.asset(ImgPath.logoutImgPath),
+          title: isTablet
+              ? const Text("")
+              : Text('Logout', style: TextStyles.font16BlueRegular),
+          onTap: () {},
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDrawerIcon(
+      {required int index, required ListItem item, required bool isTablet}) {
     return Container(
       decoration: BoxDecoration(
-        border: Border(
-          right: BorderSide(
-            color: selectedLink == index
-                ? ColorsManager.lighterBlueColor
-                : Colors.white,
-            width: 4,
-          ),
-        ),
-      ),
+          color: ColorsManager.whiteColor,
+          border: Border(
+              right: BorderSide(
+            width: 3,
+            color:
+                selectedLink == index ? ColorsManager.blueColor : Colors.white,
+          ))),
       child: ListTile(
-        leading: SvgPicture.asset(item.iconPath),
-        title: Text(
-          item.title,
-          style: selectedLink == index
-              ? TextStyles.font16LightBlueBold
-              : TextStyles.font16BlueRegular,
+        leading: SvgPicture.asset(
+          item.iconPath,
+          color: ColorsManager.blueColor,
         ),
+        title: isTablet
+            ? const Text("")
+            : Text(
+                item.title,
+                style: selectedLink == index
+                    ? TextStyles.font16LightBlueMedium
+                    : TextStyles.font16BlueRegular,
+              ),
         onTap: () {
-          () {
-            setState(() {
-              selectedLink = index;
-            });
-            BlocProvider.of<HomeCubit>(context).navigateToPage(index);
-          };
+          setState(() {
+            selectedLink = index;
+          });
+          context.read<HomeCubit>().navigateToPage(index);
         },
       ),
     );
   }
+
+  final List<ListItem> listItems = [
+    ListItem(iconPath: ImgPath.dashboardImgPath, title: 'Dashboard'),
+    ListItem(iconPath: ImgPath.transactionImgPath, title: 'My Transactions'),
+    ListItem(iconPath: ImgPath.statisticsImgPath, title: 'Statistics'),
+    ListItem(iconPath: ImgPath.walletImgPath, title: 'Wallet'),
+    ListItem(iconPath: ImgPath.chartImgPath, title: 'Investments'),
+  ];
 }
 
 class ListItem {
   final String iconPath;
   final String title;
 
-  ListItem({
-    required this.iconPath,
-    this.title = '',
-  });
+  ListItem({required this.iconPath, required this.title});
 }

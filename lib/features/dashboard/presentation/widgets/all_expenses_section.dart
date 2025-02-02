@@ -31,8 +31,6 @@ class _AllExpensesSectionState extends State<AllExpensesSection> {
     return Container(
       padding:
           EdgeInsets.all(widget.isWebLayout || widget.isTabletLayout ? 20 : 10),
-      margin: EdgeInsets.only(
-          top: widget.isWebLayout || widget.isTabletLayout ? 30 : 0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -127,7 +125,6 @@ class _AllExpensesSectionState extends State<AllExpensesSection> {
           ],
         ),
         SizedBox(height: 16),
-        // Second row with one card
 
         Row(
           children: [
