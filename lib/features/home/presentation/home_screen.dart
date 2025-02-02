@@ -8,13 +8,11 @@ import 'package:admin_dashboard/features/dashboard/presentation/widgets/responis
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final PageStorageBucket _bucket =
-      PageStorageBucket(); // ✅ FIXED: PageStorageBucket
+  final PageStorageBucket _bucket = PageStorageBucket();
 
   @override
   Widget build(BuildContext context) {
     return PageStorage(
-      // ✅ Wrap in PageStorage for Web
       bucket: _bucket,
       child: LayoutBuilder(
         builder: (context, constraints) {
