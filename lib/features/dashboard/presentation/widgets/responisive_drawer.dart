@@ -1,7 +1,9 @@
 import 'package:admin_dashboard/core/Theme/colors.dart';
 import 'package:admin_dashboard/core/Theme/style.dart';
 import 'package:admin_dashboard/core/helper/constants.dart';
+import 'package:admin_dashboard/features/home/bussines/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -14,7 +16,6 @@ class ResponsiveDrawer extends StatefulWidget {
 
 class _ResponsiveDrawerState extends State<ResponsiveDrawer> {
   int selectedLink = 0;
-
   @override
   Widget build(BuildContext context) {
     final isMobile = ResponsiveBreakpoints.of(context).isMobile;
@@ -46,7 +47,7 @@ class _ResponsiveDrawerState extends State<ResponsiveDrawer> {
                 ListTile(
                   leading: SvgPicture.asset(ImgPath.dashboardImgPath),
                   onTap: () {
-                    // Navigate to Expenses
+                    
                   },
                 ),
                 _buildDrowerIcon(index: 0, item: listItems[0]),
@@ -132,9 +133,11 @@ class _ResponsiveDrawerState extends State<ResponsiveDrawer> {
               : ColorsManager.blueColor,
         ),
         onTap: () {
+          print("___________");
           setState(() {
             selectedLink = index;
           });
+          BlocProvider.of<HomeCubit>(context).navigateToPage(index);
         },
       ),
     );
@@ -287,9 +290,12 @@ class _ResponsiveDrawerState extends State<ResponsiveDrawer> {
               : TextStyles.font16BlueRegular,
         ),
         onTap: () {
-          setState(() {
-            selectedLink = index;
-          });
+          () {
+            setState(() {
+              selectedLink = index;
+            });
+            BlocProvider.of<HomeCubit>(context).navigateToPage(index);
+          };
         },
       ),
     );
