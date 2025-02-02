@@ -138,7 +138,7 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
   Widget _buildCard(CardModel card) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(widget.isWebLayout ? 10 : 5),
+      padding: EdgeInsets.all(widget.isWebLayout ? 10 : 2),
       decoration: BoxDecoration(
         image: const DecorationImage(
           image: AssetImage('assets/images/card_shap.jpg'),
@@ -147,27 +147,27 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(widget.isWebLayout ? 8.0 : 3),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Name card',
                 style: widget.isWebLayout
                     ? TextStyles.font14WhiteRegular.copyWith(fontSize: 12)
-                    : TextStyles.font16WhiteRegular.copyWith(fontSize: 13)),
+                    : TextStyles.font16WhiteRegular.copyWith(fontSize: 10)),
             Text(card.name,
                 style: widget.isWebLayout
                     ? TextStyles.font16WhiteMedium.copyWith(fontSize: 14)
-                    : TextStyles.font20WhiteMedium.copyWith(fontSize: 16)),
+                    : TextStyles.font20WhiteMedium.copyWith(fontSize: 12)),
             const Spacer(),
             Text(card.number,
                 style: widget.isWebLayout
                     ? TextStyles.font14WhiteRegular
-                    : TextStyles.font14WhiteRegular.copyWith(fontSize: 13)),
+                    : TextStyles.font14WhiteRegular.copyWith(fontSize: 10)),
             Text(card.expiry,
                 style: widget.isWebLayout
                     ? TextStyles.font13WhiteRegular.copyWith(fontSize: 11)
-                    : TextStyles.font13WhiteRegular.copyWith(fontSize: 11)),
+                    : TextStyles.font13WhiteRegular.copyWith(fontSize: 8)),
           ],
         ),
       ),
@@ -187,7 +187,8 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
                     : TextStyles.font20BlueSemiBold.copyWith(fontSize: 17)),
             TextButton(
               onPressed: () {},
-              child: Text('See all', style: TextStyles.font16LightBlueMedium),
+              child: Text('See all',
+                  style: TextStyles.font16BlueRegular.copyWith(fontSize: 13)),
             ),
           ],
         ),
