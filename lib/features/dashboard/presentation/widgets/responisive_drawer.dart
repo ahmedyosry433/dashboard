@@ -3,9 +3,7 @@
 import 'package:admin_dashboard/core/Theme/colors.dart';
 import 'package:admin_dashboard/core/Theme/style.dart';
 import 'package:admin_dashboard/core/helper/constants.dart';
-import 'package:admin_dashboard/features/home/bussines/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -154,7 +152,6 @@ class _ResponsiveDrawerState extends State<ResponsiveDrawer> {
           setState(() {
             selectedLink = index;
           });
-          context.read<HomeCubit>().navigateToPage(index);
         },
       ),
     );

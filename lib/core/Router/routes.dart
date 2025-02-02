@@ -1,6 +1,5 @@
 class Routes {
-  static const String homeScreen = '/';
-  static const String dashboardScreen = '/dashboardScreen';
-  static const String investmentScreen = '/investmentScreen';
-  static const String walletScreen = '/walletScreen';
+  static const String dashboardScreen = '/';
+  static const String investmentScreen = '/investment-screen';
+  static const String walletScreen = '/wallet-screen';
 }

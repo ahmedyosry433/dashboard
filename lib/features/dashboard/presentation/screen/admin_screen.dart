@@ -1,3 +1,6 @@
+import 'package:admin_dashboard/core/Router/routes.dart';
+import 'package:admin_dashboard/core/component/side_bar.dart';
+import 'package:admin_dashboard/core/flutter_admin_scaffold/admin_scaffold.dart';
 import 'package:admin_dashboard/features/dashboard/data/models/layoutinfo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -14,11 +17,27 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final PageStorageBucket _bucket = PageStorageBucket();
   @override
   Widget build(BuildContext context) {
-    final layoutInfo = _getLayoutInfo(context);
+    SideBarWidget sideBar = SideBarWidget();
 
-    return _buildBody(layoutInfo);
+    return PageStorage(
+        bucket: _bucket,
+        child: LayoutBuilder(builder: (context, constraints) {
+          final layoutInfo = _getLayoutInfo(context);
+
+          return AdminScaffold(
+              key: _scaffoldKey,
+              backgroundColor: Colors.grey[100],
+              sideBar: sideBar.sideBarMenus(context, Routes.dashboardScreen),
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+                
+              ),
+              body: _buildBody(layoutInfo));
+        }));
   }
 
   Widget _buildBody(LayoutInfo layoutInfo) {

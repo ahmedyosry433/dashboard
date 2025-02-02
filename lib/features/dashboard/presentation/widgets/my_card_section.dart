@@ -64,7 +64,6 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
   Widget build(BuildContext context) {
     final isMobile = widget.isMobile;
     final isTablet = widget.isTabletLayout;
-    final isWebLayout = widget.isWebLayout;
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -141,37 +140,36 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
       width: double.infinity,
       padding: EdgeInsets.all(widget.isWebLayout ? 10 : 5),
       decoration: BoxDecoration(
-        color: card.color,
+        image: const DecorationImage(
+          image: AssetImage('assets/images/card_shap.jpg'),
+          fit: BoxFit.cover,
+        ),
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: card.color.withOpacity(0.3),
-            blurRadius: 12,
-            offset: const Offset(0, 6),
-          ),
-        ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Name card',
-              style: widget.isWebLayout
-                  ? TextStyles.font14WhiteRegular.copyWith(fontSize: 12)
-                  : TextStyles.font16WhiteRegular.copyWith(fontSize: 13)),
-          Text(card.name,
-              style: widget.isWebLayout
-                  ? TextStyles.font16WhiteMedium.copyWith(fontSize: 14)
-                  : TextStyles.font20WhiteMedium.copyWith(fontSize: 16)),
-          const Spacer(),
-          Text(card.number,
-              style: widget.isWebLayout
-                  ? TextStyles.font14WhiteRegular
-                  : TextStyles.font14WhiteRegular.copyWith(fontSize: 13)),
-          Text(card.expiry,
-              style: widget.isWebLayout
-                  ? TextStyles.font13WhiteRegular.copyWith(fontSize: 11)
-                  : TextStyles.font13WhiteRegular.copyWith(fontSize: 11)),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Name card',
+                style: widget.isWebLayout
+                    ? TextStyles.font14WhiteRegular.copyWith(fontSize: 12)
+                    : TextStyles.font16WhiteRegular.copyWith(fontSize: 13)),
+            Text(card.name,
+                style: widget.isWebLayout
+                    ? TextStyles.font16WhiteMedium.copyWith(fontSize: 14)
+                    : TextStyles.font20WhiteMedium.copyWith(fontSize: 16)),
+            const Spacer(),
+            Text(card.number,
+                style: widget.isWebLayout
+                    ? TextStyles.font14WhiteRegular
+                    : TextStyles.font14WhiteRegular.copyWith(fontSize: 13)),
+            Text(card.expiry,
+                style: widget.isWebLayout
+                    ? TextStyles.font13WhiteRegular.copyWith(fontSize: 11)
+                    : TextStyles.font13WhiteRegular.copyWith(fontSize: 11)),
+          ],
+        ),
       ),
     );
   }
