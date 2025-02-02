@@ -38,15 +38,15 @@ class InvestmentScreen extends StatelessWidget {
   Widget _buildBalanceCard() {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
+      child: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Total Balance",
+            Text("Total Balance",
                 style: TextStyle(fontSize: 16, color: Colors.grey)),
-            const SizedBox(height: 8),
-            const Text("\$12,500",
+            SizedBox(height: 8),
+            Text("\$12,500",
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
           ],
         ),
@@ -59,8 +59,8 @@ class InvestmentScreen extends StatelessWidget {
       height: 200,
       child: LineChart(
         LineChartData(
-          gridData: FlGridData(show: false),
-          titlesData: FlTitlesData(show: false),
+          gridData: const FlGridData(show: false),
+          titlesData: const FlTitlesData(show: false),
           borderData: FlBorderData(show: false),
           lineBarsData: [
             LineChartBarData(
@@ -99,7 +99,7 @@ class InvestmentScreen extends StatelessWidget {
       child: ListTile(
         leading: CircleAvatar(
             backgroundColor: color,
-            child: Text(title[0], style: TextStyle(color: Colors.white))),
+            child: Text(title[0], style: const TextStyle(color: Colors.white))),
         title: Text(title,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         subtitle: Text(amount,

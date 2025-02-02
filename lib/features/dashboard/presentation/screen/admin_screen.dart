@@ -34,7 +34,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
               sideBar: sideBar.sideBarMenus(context, Routes.dashboardScreen),
               appBar: AppBar(
                 backgroundColor: Colors.white,
-                
               ),
               body: _buildBody(layoutInfo));
         }));
