@@ -5,18 +5,14 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class InvestmentScreen extends StatelessWidget {
-  const InvestmentScreen({super.key});
+  InvestmentScreen({super.key});
+
+  SideBarWidget sideBar = SideBarWidget();
 
   @override
   Widget build(BuildContext context) {
-    SideBarWidget sideBar = SideBarWidget();
-
     return AdminScaffold(
-      backgroundColor: Colors.grey[100],
       sideBar: sideBar.sideBarMenus(context, Routes.investmentScreen),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

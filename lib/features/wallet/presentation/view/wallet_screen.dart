@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:admin_dashboard/core/Router/routes.dart';
 import 'package:admin_dashboard/core/component/side_bar.dart';
 import 'package:admin_dashboard/core/flutter_admin_scaffold/admin_scaffold.dart';
@@ -10,12 +12,9 @@ class WalletScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SideBarWidget sideBar = SideBarWidget();
 
+    log(" m : ${MediaQuery.of(context).size.width}");
     return AdminScaffold(
-      backgroundColor: Colors.white,
       sideBar: sideBar.sideBarMenus(context, Routes.walletScreen),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -35,15 +34,15 @@ class WalletScreen extends StatelessWidget {
   Widget _buildBalanceCard() {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
+      child: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Total Balance",
+            Text("Total Balance",
                 style: TextStyle(fontSize: 16, color: Colors.grey)),
-            const SizedBox(height: 8),
-            const Text("\$8,750",
+            SizedBox(height: 8),
+            Text("\$8,750",
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
           ],
         ),
@@ -70,7 +69,7 @@ class WalletScreen extends StatelessWidget {
       child: ListTile(
         leading: CircleAvatar(
             backgroundColor: color,
-            child: Icon(Icons.monetization_on, color: Colors.white)),
+            child: const Icon(Icons.monetization_on, color: Colors.white)),
         title: Text(title,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         subtitle: Text(amount, style: TextStyle(fontSize: 16, color: color)),

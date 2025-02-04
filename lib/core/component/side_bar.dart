@@ -11,6 +11,7 @@ import 'package:flutter_svg/svg.dart';
 class SideBarWidget {
   sideBarMenus(BuildContext context, selectedRoute) {
     return SideBar(
+        width: MediaQuery.of(context).size.width > 900 ? 240 : 80,
         borderColor: Colors.transparent,
         backgroundColor: Colors.white,
         activeIconColor: ColorsManager.blueColor,

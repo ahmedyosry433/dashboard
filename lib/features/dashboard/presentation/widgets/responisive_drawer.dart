@@ -1,10 +1,12 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:admin_dashboard/core/Router/routes.dart';
 import 'package:admin_dashboard/core/Theme/colors.dart';
 import 'package:admin_dashboard/core/Theme/style.dart';
 import 'package:admin_dashboard/core/helper/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ResponsiveDrawer extends StatefulWidget {
@@ -29,7 +31,7 @@ class _ResponsiveDrawerState extends State<ResponsiveDrawer> {
       return _buildMobileDrawer(context);
     } else if (isTablet) {
       return _buildTabletDrawer(context);
-    } else if (isMiniTablet) {
+    } else if (isTablet) {
       return _buildTabletDrawer(context);
     } else {
       return _buildMobileDrawer(context);
@@ -70,7 +72,6 @@ class _ResponsiveDrawerState extends State<ResponsiveDrawer> {
 
   Widget _buildMobileDrawer(BuildContext context) {
     return Drawer(
-      width: MediaQuery.sizeOf(context).width / 5.5,
       backgroundColor: Colors.white,
       child: Column(
         children: [
@@ -152,6 +153,7 @@ class _ResponsiveDrawerState extends State<ResponsiveDrawer> {
           setState(() {
             selectedLink = index;
           });
+          context.go(Routes.walletScreen);
         },
       ),
     );

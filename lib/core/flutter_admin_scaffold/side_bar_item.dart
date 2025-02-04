@@ -70,17 +70,20 @@ class SideBarItem extends StatelessWidget {
           contentPadding: _getTilePadding(depth),
           leading:
               _buildIcon(item.selectedWidget, item.unSelectedWidget, selected),
-          title: _buildTitle(item.title, selected),
+          title:  _buildTitle(item.title,context, selected)
+              ,
           selected: selected,
-          trailing: selected
-              ? const Padding(
-                  padding: EdgeInsetsDirectional.only(top: 10, bottom: 10),
-                  child: VerticalDivider(
-                    color: Color(0XFF2E6BF4),
-                    thickness: 3,
-                  ),
-                )
-              : null,
+          trailing: MediaQuery.of(context).size.width > 900
+              ? selected
+                  ? const Padding(
+                      padding: EdgeInsetsDirectional.only(top: 10, bottom: 10),
+                      child: VerticalDivider(
+                        color: Color(0XFF2E6BF4),
+                        thickness: 3,
+                      ),
+                    )
+                  : null
+              : const SizedBox(),
           selectedTileColor: activeBackgroundColor,
           onTap: () {
             if (onSelected != null) {
@@ -114,10 +117,11 @@ class SideBarItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsetsDirectional.only(start: 10),
         child: ExpansionTile(
+          showTrailingIcon: false,
           tilePadding: _getTilePadding(depth),
           leading:
               _buildIcon(item.selectedWidget, item.unSelectedWidget, selected),
-          title: _buildTitle(item.title),
+          title: _buildTitle(item.title,context),
           initiallyExpanded: selected,
           children: childrenTiles,
         ),
@@ -142,9 +146,10 @@ class SideBarItem extends StatelessWidget {
     return selected ? selectedWidget : unSelectedWidget;
   }
 
-  Widget _buildTitle(String title, [bool selected = false]) {
+  Widget _buildTitle(String title, BuildContext context,[bool selected = false ]) {
     return Text(
-      title,
+      (MediaQuery.of(context).size.width > 900)
+              ?title :"",
       style: selected ? activeTextStyle : textStyle,
     );
   }
