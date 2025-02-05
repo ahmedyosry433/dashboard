@@ -64,8 +64,13 @@ class SideBarItem extends StatelessWidget {
         ),
         child: ListTile(
           contentPadding: _getTilePadding(depth),
-          leading: _buildIcon(item.selectedWidget, item.unSelectedWidget, selected),
-          title: _buildTitle(item.title, selected),
+          leading:
+              _buildIcon(item.selectedWidget, item.unSelectedWidget, selected),
+          title: _buildTitle(
+            item.title,
+            context,
+            selected,
+          ),
           selected: selected,
           trailing: MediaQuery.of(context).size.width > 900
               ? selected
@@ -113,8 +118,9 @@ class SideBarItem extends StatelessWidget {
         child: ExpansionTile(
           trailing: const SizedBox(),
           tilePadding: _getTilePadding(depth),
-          leading: _buildIcon(item.selectedWidget, item.unSelectedWidget, selected),
-          title: _buildTitle(item.title),
+          leading:
+              _buildIcon(item.selectedWidget, item.unSelectedWidget, selected),
+          title: _buildTitle(item.title, context),
           initiallyExpanded: selected,
           children: childrenTiles,
         ),
@@ -134,13 +140,18 @@ class SideBarItem extends StatelessWidget {
     return false;
   }
 
-  Widget _buildIcon(Widget selectedWidget, Widget unSelectedWidget, [bool selected = false]) {
+  Widget _buildIcon(Widget selectedWidget, Widget unSelectedWidget,
+      [bool selected = false]) {
     return selected ? selectedWidget : unSelectedWidget;
   }
 
-  Widget _buildTitle(String title, [bool selected = false]) {
+  Widget _buildTitle(String title, BuildContext context,
+      [bool selected = false]) {
     return Text(
-      1.sw > 900 ? title : "",
+      MediaQuery.of(context).size.width > 900 ||
+              MediaQuery.of(context).size.width < 400
+          ? title
+          : "",
       style: selected ? activeTextStyle : textStyle,
     );
   }

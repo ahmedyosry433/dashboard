@@ -15,17 +15,17 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
-    final bool isMobile = MediaQuery.of(context).size.width < 900;
+    bool isMobile = MediaQuery.of(context).size.width < 900;
     final isWebLayout = MediaQuery.of(context).size.width < 1100;
     final isTabletLayout = MediaQuery.of(context).size.width > 1101;
     SideBarWidget sideBar = SideBarWidget();
 
     return LayoutBuilder(builder: (context, constraints) {
       return AdminScaffold(
-        
           backgroundColor: Colors.grey[100],
           sideBar: sideBar.sideBarMenus(context, Routes.dashboardScreen),
           appBar: AppBar(),
+          mobileThreshold: 400,
           body: isMobile
               ? MobileLayout(
                   isMobile: isMobile,

@@ -15,8 +15,7 @@ class InvestmentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isMobile = MediaQuery.of(context).size.width < 900;
     return AdminScaffold(
-            backgroundColor: Colors.grey[100],
-
+      backgroundColor: Colors.grey[100],
       sideBar: sideBar.sideBarMenus(context, Routes.investmentScreen),
       appBar: isMobile
           ? AppBar(

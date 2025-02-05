@@ -65,13 +65,21 @@ class SideBarWidget {
           children: [
             ListTile(
               leading: SvgPicture.asset(ImgPath.settingImgPath),
-              title: Text(1.sw > 900 ? "Settings" : "",
+              title: Text(
+                  MediaQuery.of(context).size.width > 900 ||
+                          MediaQuery.of(context).size.width < 400
+                      ? "Settings"
+                      : "",
                   style: TextStyles.font16BlueRegular),
               onTap: () {},
             ),
             ListTile(
               leading: SvgPicture.asset(ImgPath.logoutImgPath),
-              title: Text(1.sw > 900 ? "Logout" : "",
+              title: Text(
+                  MediaQuery.of(context).size.width > 900 ||
+                          MediaQuery.of(context).size.width < 400
+                      ? "Logout"
+                      : "",
                   style: TextStyles.font16BlueRegular),
               onTap: () {},
             ),

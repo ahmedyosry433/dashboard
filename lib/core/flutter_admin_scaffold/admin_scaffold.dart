@@ -137,7 +137,7 @@ class AdminScaffoldState extends State<AdminScaffold>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: widget.backgroundColor,
-      appBar: _appBar,
+      appBar: _isMobile ? _appBar : null,
       body: AnimatedBuilder(
         animation: _animation,
         builder: (_, __) => widget.sideBar == null
