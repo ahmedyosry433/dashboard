@@ -74,12 +74,14 @@ class CardWidget extends StatelessWidget {
                       : ColorsManager.blueColor,
                 ),
               ),
-              Icon(
-                Icons.chevron_right,
-                color: selectedCard == index
-                    ? Colors.white
-                    : ColorsManager.darkBlueColor,
-                size: 24,
+              Flexible(
+                child: Icon(
+                  Icons.chevron_right,
+                  color: selectedCard == index
+                      ? Colors.white
+                      : ColorsManager.darkBlueColor,
+                  size: 24,
+                ),
               ),
             ],
           ),
@@ -98,11 +100,13 @@ class CardWidget extends StatelessWidget {
                 : TextStyles.font14BlackRegular,
           ),
           const SizedBox(height: 16),
-          Text(
-            '\$${(data['amount'] as int).toStringAsFixed(0)}',
-            style: selectedCard == index
-                ? TextStyles.font24WhiteSemiBold
-                : TextStyles.font24PrimrySemiBold,
+          FittedBox(
+            child: Text(
+              '\$${(data['amount'] as int).toStringAsFixed(0)}',
+              style: selectedCard == index
+                  ? TextStyles.font24WhiteSemiBold
+                  : TextStyles.font24PrimrySemiBold,
+            ),
           ),
         ],
       ),

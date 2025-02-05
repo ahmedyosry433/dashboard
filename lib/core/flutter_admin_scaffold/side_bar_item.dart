@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'admin_menu_item.dart';
 
@@ -58,28 +59,21 @@ class SideBarItem extends StatelessWidget {
     if (item.children.isEmpty) {
       return AnimatedContainer(
         duration: const Duration(milliseconds: 500),
-        padding: const EdgeInsetsDirectional.only(
-          start: 10,
-          end: 10,
-        ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadiusDirectional.circular(15),
           color: selected ? const Color(0xFFECF0F8) : Colors.white,
         ),
         child: ListTile(
           contentPadding: _getTilePadding(depth),
-          leading:
-              _buildIcon(item.selectedWidget, item.unSelectedWidget, selected),
-          title:  _buildTitle(item.title,context, selected)
-              ,
+          leading: _buildIcon(item.selectedWidget, item.unSelectedWidget, selected),
+          title: _buildTitle(item.title, selected),
           selected: selected,
           trailing: MediaQuery.of(context).size.width > 900
               ? selected
                   ? const Padding(
-                      padding: EdgeInsetsDirectional.only(top: 10, bottom: 10),
+                      padding: EdgeInsetsDirectional.only(top: 5, bottom: 5),
                       child: VerticalDivider(
-                        color: Color(0XFF2E6BF4),
-                        thickness: 3,
+                        color: Color(0xFF4EB7F2),
+                        thickness: 4,
                       ),
                     )
                   : null
@@ -117,11 +111,10 @@ class SideBarItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsetsDirectional.only(start: 10),
         child: ExpansionTile(
-          showTrailingIcon: false,
+          trailing: const SizedBox(),
           tilePadding: _getTilePadding(depth),
-          leading:
-              _buildIcon(item.selectedWidget, item.unSelectedWidget, selected),
-          title: _buildTitle(item.title,context),
+          leading: _buildIcon(item.selectedWidget, item.unSelectedWidget, selected),
+          title: _buildTitle(item.title),
           initiallyExpanded: selected,
           children: childrenTiles,
         ),
@@ -141,15 +134,13 @@ class SideBarItem extends StatelessWidget {
     return false;
   }
 
-  Widget _buildIcon(Widget selectedWidget, Widget unSelectedWidget,
-      [bool selected = false]) {
+  Widget _buildIcon(Widget selectedWidget, Widget unSelectedWidget, [bool selected = false]) {
     return selected ? selectedWidget : unSelectedWidget;
   }
 
-  Widget _buildTitle(String title, BuildContext context,[bool selected = false ]) {
+  Widget _buildTitle(String title, [bool selected = false]) {
     return Text(
-      (MediaQuery.of(context).size.width > 900)
-              ?title :"",
+      1.sw > 900 ? title : "",
       style: selected ? activeTextStyle : textStyle,
     );
   }

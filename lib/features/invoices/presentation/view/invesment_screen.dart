@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:admin_dashboard/core/Router/routes.dart';
 import 'package:admin_dashboard/core/component/side_bar.dart';
 import 'package:admin_dashboard/core/flutter_admin_scaffold/admin_scaffold.dart';
@@ -11,8 +13,19 @@ class InvestmentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isMobile = MediaQuery.of(context).size.width < 900;
     return AdminScaffold(
+            backgroundColor: Colors.grey[100],
+
       sideBar: sideBar.sideBarMenus(context, Routes.investmentScreen),
+      appBar: isMobile
+          ? AppBar(
+              leading: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.menu),
+              ),
+            )
+          : null,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

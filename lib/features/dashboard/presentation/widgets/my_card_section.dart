@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, deprecated_member_use
 
 import 'package:admin_dashboard/core/Theme/colors.dart';
 import 'package:admin_dashboard/core/Theme/style.dart';
@@ -67,7 +67,6 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
 
     return Container(
       padding: const EdgeInsets.all(20),
-      // margin: EdgeInsets.only(top: isWebLayout || isTablet ? 30 : 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -91,25 +90,24 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
       children: [
         Text('My card', style: TextStyles.font20BlueSemiBold),
         const SizedBox(height: 16),
-        CarouselSlider.builder(
-          itemCount: cards.length,
-          options: CarouselOptions(
-            aspectRatio: isMobile
-                ? 16 / 9
-                : isTablet
-                    ? 2.5
-                    : 2.50,
-            viewportFraction: 1,
-            enlargeCenterPage: true,
-            onPageChanged: (index, reason) {
-              setState(() {
-                _currentCard = index;
-              });
+        SizedBox(
+          height: 200,
+          width: double.infinity,
+          child: CarouselSlider.builder(
+            itemCount: cards.length,
+            options: CarouselOptions(
+              viewportFraction: 1,
+              enlargeCenterPage: true,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  _currentCard = index;
+                });
+              },
+            ),
+            itemBuilder: (context, index, realIndex) {
+              return _buildCard(cards[index]);
             },
           ),
-          itemBuilder: (context, index, realIndex) {
-            return _buildCard(cards[index]);
-          },
         ),
         const SizedBox(height: 8),
 
@@ -138,7 +136,7 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
   Widget _buildCard(CardModel card) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(widget.isWebLayout ? 10 : 2),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         image: const DecorationImage(
           image: AssetImage('assets/images/card_shap.jpg'),
@@ -181,10 +179,14 @@ class _CardAndTransactionsState extends State<CardAndTransactions> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Transaction History',
-                style: widget.isWebLayout
-                    ? TextStyles.font20BlueSemiBold
-                    : TextStyles.font20BlueSemiBold.copyWith(fontSize: 17)),
+            Expanded(
+              child: Text('Transaction History',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: widget.isWebLayout
+                      ? TextStyles.font20BlueSemiBold
+                      : TextStyles.font20BlueSemiBold.copyWith(fontSize: 17)),
+            ),
             TextButton(
               onPressed: () {},
               child: Text('See all',

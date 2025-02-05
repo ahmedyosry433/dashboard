@@ -5,7 +5,7 @@ import 'package:admin_dashboard/features/dashboard/presentation/widgets/quick_in
 import 'package:flutter/material.dart';
 
 class WebTabletLayout extends StatefulWidget {
-  WebTabletLayout({
+  const WebTabletLayout({
     required this.isMobile,
     required this.isWebLayout,
     required this.isTabletLayout,
@@ -21,6 +21,7 @@ class WebTabletLayout extends StatefulWidget {
 }
 
 class _WebTabletLayoutState extends State<WebTabletLayout> {
+  
   @override
   Widget build(BuildContext context) {
     return Expanded(

@@ -11,10 +11,20 @@ class WalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SideBarWidget sideBar = SideBarWidget();
+    final bool isMobile = MediaQuery.of(context).size.width < 900;
 
     log(" m : ${MediaQuery.of(context).size.width}");
     return AdminScaffold(
+      backgroundColor: Colors.grey[100],
       sideBar: sideBar.sideBarMenus(context, Routes.walletScreen),
+      appBar: isMobile
+          ? AppBar(
+              leading: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.menu),
+              ),
+            )
+          : null,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

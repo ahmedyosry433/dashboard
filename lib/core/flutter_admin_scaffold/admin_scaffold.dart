@@ -9,7 +9,7 @@ class AdminScaffold extends StatefulWidget {
     this.sideBar,
     required this.body,
     this.backgroundColor,
-    this.mobileThreshold = 768.0,
+    this.mobileThreshold = 500,
   });
 
   final AppBar? appBar;

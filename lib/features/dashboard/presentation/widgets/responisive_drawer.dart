@@ -1,13 +1,10 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:admin_dashboard/core/Router/routes.dart';
 import 'package:admin_dashboard/core/Theme/colors.dart';
 import 'package:admin_dashboard/core/Theme/style.dart';
 import 'package:admin_dashboard/core/helper/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class ResponsiveDrawer extends StatefulWidget {
   const ResponsiveDrawer({super.key});
@@ -21,17 +18,12 @@ class _ResponsiveDrawerState extends State<ResponsiveDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = ResponsiveBreakpoints.of(context).isMobile;
-    final isMiniTablet =
-        ResponsiveBreakpoints.of(context).between(MOBILE, TABLET);
-
-    final isTablet = ResponsiveBreakpoints.of(context).isTablet;
+    final bool isMobile = MediaQuery.of(context).size.width < 400;
+    final isTabletLayout = MediaQuery.of(context).size.width < 901;
 
     if (isMobile) {
       return _buildMobileDrawer(context);
-    } else if (isTablet) {
-      return _buildTabletDrawer(context);
-    } else if (isTablet) {
+    } else if (isTabletLayout) {
       return _buildTabletDrawer(context);
     } else {
       return _buildMobileDrawer(context);
@@ -153,7 +145,6 @@ class _ResponsiveDrawerState extends State<ResponsiveDrawer> {
           setState(() {
             selectedLink = index;
           });
-          context.go(Routes.walletScreen);
         },
       ),
     );
