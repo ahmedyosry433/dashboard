@@ -21,10 +21,10 @@ class WebTabletLayout extends StatefulWidget {
 }
 
 class _WebTabletLayoutState extends State<WebTabletLayout> {
-  
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox(
+      width: double.infinity,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
