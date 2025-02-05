@@ -22,9 +22,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     return LayoutBuilder(builder: (context, constraints) {
       return AdminScaffold(
-          backgroundColor: Colors.grey[100],
+          backgroundColor: isTabletLayout ? Colors.grey[100] : Colors.white,
           sideBar: sideBar.sideBarMenus(context, Routes.dashboardScreen),
-          appBar: AppBar(),
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            toolbarHeight: 40,
+          ),
           mobileThreshold: 400,
           body: isMobile
               ? MobileLayout(

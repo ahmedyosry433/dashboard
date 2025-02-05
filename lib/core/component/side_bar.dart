@@ -6,13 +6,15 @@ import 'package:admin_dashboard/core/flutter_admin_scaffold/side_bar.dart';
 import 'package:admin_dashboard/core/helper/constants.dart';
 import 'package:admin_dashboard/core/helper/extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SideBarWidget {
   sideBarMenus(BuildContext context, selectedRoute) {
     return SideBar(
-      width: MediaQuery.of(context).size.width > 900 ? 260 : 100,
+      width: MediaQuery.of(context).size.width > 900 ||
+              MediaQuery.of(context).size.width < 400
+          ? 260
+          : 100,
       borderColor: Colors.transparent,
       backgroundColor: Colors.white,
       activeIconColor: ColorsManager.blueColor,
